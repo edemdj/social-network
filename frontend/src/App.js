@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-do
 import Home from './pages/Home';
 import Login from './pages/Login';
 import About from './pages/About';
+import Register from './pages/Register';
 import './styles.css';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
             <li><NavLink to="/" exact activeClassName="active">Accueil</NavLink></li>
             <li><NavLink to="/about" activeClassName="active">À propos</NavLink></li>
             <li><NavLink to="/login" activeClassName="active">Connexion</NavLink></li>
+            <li><NavLink to="/register" activeClassName="active">Inscription</NavLink></li>
           </ul>
         </nav>
       </header>
@@ -23,6 +25,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </main>
       <footer>
