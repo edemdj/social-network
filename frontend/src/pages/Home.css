@@ -1,0 +1,46 @@
+/* Home.css */
+.home-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .intro {
+    margin-bottom: 20px;
+  }
+  
+  .features {
+    margin-bottom: 20px;
+  }
+  
+  .features ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+  
+  .cta {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .primary-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .secondary-btn {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .primary-btn:hover,
+  .secondary-btn:hover {
+    opacity: 0.9;
+  }

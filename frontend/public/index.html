@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,40 +9,11 @@
   <meta name="description" content="Un mini réseau social pour partager et interagir." />
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <link rel="stylesheet" href="%PUBLIC_URL%/styles.css" /> <!-- Lien vers ton CSS -->
+  <link rel="stylesheet" href="%PUBLIC_URL%/styles.css" />
   <title>Mon Mini Réseau Social</title>
 </head>
 <body>
-    <header>
-        <h1>Bienvenue sur Mon Mini Réseau Social</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">À propos</a></li>
-                <li><a href="#">Connexion</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <section id="posts">
-            <h2>Publications</h2>
-            <!-- Les publications seront générées ici par React -->
-        </section>
-        
-        <section id="new-post">
-            <h2>Créer une publication</h2>
-            <form id="post-form">
-                <textarea placeholder="Écrivez votre publication ici..." required></textarea>
-                <button type="submit">Publier</button>
-            </form>
-        </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2024 Mon Mini Réseau Social</p>
-    </footer>
-
-    <script src="script.js"></script>
+  <div id="root"></div>
+  <script src="%PUBLIC_URL%/main.js"></script> 
 </body>
 </html>

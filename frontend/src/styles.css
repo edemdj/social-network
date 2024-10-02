@@ -1,31 +1,99 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+/* Reset CSS (facultatif) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 1rem;
+/* Section globale */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Typographie */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+/* Navigation */
+nav {
+  background-color: #333;
+  padding: 1em;
 }
 
 nav ul {
-    list-style-type: none;
-    padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
 }
 
-nav ul li {
-    display: inline;
-    margin-right: 15px;
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+  cursor: pointer; /* Assure que le lien est cliquable */
+  transition: color 0.3s ease;
 }
 
-main {
-    padding: 1rem;
+nav a:hover {
+  color: #007bff; /* Couleur au survol */
 }
 
-footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #f1f1f1;
+/* Formulaires */
+form {
+  margin: 2em 0;
+}
+
+input[type="email"],
+input[type="password"] {
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  pointer-events: auto; /* Permettre l'interaction */
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Assure que les boutons dans les liens soient bien interactifs */
+button:focus,
+a:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Pages spécifiques */
+.login-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2em;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
 }
