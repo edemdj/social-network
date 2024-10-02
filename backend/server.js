@@ -3,6 +3,7 @@ const mysql = require('mysql2');
 const cors = require('cors');
 const path = require('path');
 const authRoutes = require('./routes/auth');
+const portfolioRoutes = require('./routes/portfolio');
 
 const app = express();
 
@@ -35,6 +36,8 @@ db.connect((err) => {
 
   // Lien vers tes routes d'authentification
   app.use('/api/auth', authRoutes(db));
+
+  app.use('/api', portfolioRoutes(db));
 
   // Serve les fichiers statiques de React
   app.use(express.static(path.join(__dirname, '../frontend/build')));
