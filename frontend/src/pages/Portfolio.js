@@ -4,7 +4,7 @@ function Portfolio() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [link, setLink] = useState('');
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,8 +42,16 @@ function Portfolio() {
         <div className="form-group">
           <label htmlFor="theme">Thème :</label>
           <select className="form-control" id="theme" value={theme} onChange={(e) => setTheme(e.target.value)} required>
-            <option value="light">Clair</option>
-            <option value="dark">Sombre</option>
+            <option value="">Sélectionner un thème</option>
+            <option value="1">Technologie</option>
+            <option value="2">Art</option>
+            <option value="3">Science</option>
+            <option value="4">Affaires</option>
+            <option value="5">Éducation</option>
+            <option value="6">Santé</option>
+            <option value="7">Sports</option>
+            <option value="8">Musique</option>
+            <option value="9">Nourriture</option>
           </select>
         </div>
         <button type="submit" className="btn btn-primary">Enregistrer</button>

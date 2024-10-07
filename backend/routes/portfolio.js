@@ -1,26 +1,67 @@
-
 const express = require('express');
 const router = express.Router();
 
 module.exports = (db) => {
-  router.post('/portfolio', async (req, res) => {
-    const { title, description, link, theme } = req.body;
+    router.post('/portfolio', (req, res) => {
+        const { links, theme_id, user_id } = req.body;
+        let query, values;
 
-    try {
-      // Insérez les données du portfolio dans la base de données
-      db.query('INSERT INTO portfolios (title, description, link, theme) VALUES (?, ?, ?, ?)', [title, description, link, theme], (err, result) => {
-        if (err) {
-          console.error('Erreur de requête SQL:', err);
-          return res.status(500).json({ message: 'Erreur serveur' });
+        if (theme_id) {
+            query = `INSERT INTO portfolios (links, theme_id, user_id) VALUES (?, ?, ?)`;
+            values = [links, theme_id, user_id];
+        } else {
+            query = 'INSERT INTO portfolios (links, user_id) VALUES (?, ?)';
+            values = [links, user_id];
         }
 
-        res.status(201).json({ message: 'Portfolio enregistré avec succès' });
-      });
-    } catch (err) {
-      console.error('Erreur serveur:', err);
-      res.status(500).json({ message: 'Erreur serveur' });
-    }
-  });
+        db.query(query, values, (err, results) => {
+            if (err) {
+                console.error('Erreur lors de la création du portfolio:', err);
+                res.status(500).send('Erreur lors de la création du portfolio');
+            } else {
+                res.status(201).send('Portfolio créé avec succès');
+            }
+        });
+    });
 
-  return router;
+    router.get('/portfolio/:id', (req, res) => {
+        const portfolioId = req.params.id;
+        const query = 'SELECT * FROM portfolios WHERE id = ?';
+        db.query(query, [portfolioId], (err, results) => {
+          if (err) {
+            res.status(500).send('Erreur lors de la récupération du portfolio');
+          } else if (results.length === 0) {
+            res.status(404).send('Portfolio non trouvé');
+          } else {
+            res.status(200).json(results[0]);
+          }
+        });
+      });
+
+    router.put('/portfolio/:id', (req, res) => {
+        const { id } = req.params;
+        const { links, theme_id } = req.body;
+        const query = 'UPDATE portfolios SET links = ?, theme_id = ? WHERE id = ?';
+        db.query(query, [links, theme_id, id], (err, results) => {
+            if (err) {
+                res.status(500).send('Erreur lors de la mise à jour du portfolio');
+            } else {
+                res.status(200).send('Portfolio mis à jour avec succès');
+            }
+        });
+    });
+
+    router.delete('/portfolio/:id', (req, res) => {
+        const { id } = req.params;
+        const query = 'DELETE FROM portfolios WHERE id = ?';
+        db.query(query, [id], (err, results) => {
+            if (err) {
+                res.status(500).send('Erreur lors de la suppression du portfolio');
+            } else {
+                res.status(200).send('Portfolio supprimé avec succès');
+            }
+        });
+    });
+
+    return router;
 };
