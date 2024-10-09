@@ -1,8 +1,8 @@
 const express = require('express');
+const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const router = express.Router();
 
 module.exports = (db) => {
   // Route pour la connexion utilisateur

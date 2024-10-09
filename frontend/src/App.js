@@ -6,6 +6,7 @@ import About from './pages/About';
 import Register from './pages/Register';
 import Portfolio from './pages/Portfolio';
 import BurgerMenu from './components/BurgerMenu';
+import PortfolioSearch from './components/PortfolioSearch';
 import './styles.css';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
 
           </ul>
         </nav>
+        <PortfolioSearch />
       </header>
       <main>
         <Routes>

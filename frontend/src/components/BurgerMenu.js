@@ -22,6 +22,7 @@ const BurgerMenu = () => {
           <li><a href="/login">Connexion</a></li>
           <li><a href="/register">Inscription</a></li>
           <li><a href="/portfolio">Créer Portfolio</a></li>
+          <li><a href="/search">Trouver Portfolio</a></li>
         </ul>
       </nav>
     </div>

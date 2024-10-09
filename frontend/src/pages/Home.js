@@ -12,6 +12,7 @@ const Home = () => {
         <h3>Fonctionnalités principales</h3>
         <ul>
           <li>Créer des publications</li>
+          <li>trouver des portfolios</li>
           <li>Commenter et aimer les publications</li>
           <li>Ajouter et suivre des amis</li>
         </ul>
