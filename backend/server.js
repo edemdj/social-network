@@ -34,6 +34,11 @@ db.connect((err) => {
   }
   console.log('MySQL connecté');
 
+  // Error handling middleware
+  app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('quelque chose s\'est mal passé');
+  });
   // Lien vers tes routes d'authentification
   app.use('/api/auth', authRoutes(db));
   app.use('/api', portfolioRoutes(db));
@@ -48,10 +53,4 @@ db.connect((err) => {
 
   const PORT = 5000;
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-});
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('quelque chose s\'est mal passé');
 });
