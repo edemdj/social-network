@@ -16,12 +16,12 @@ module.exports = (db) => {
     }
 
     db.query(query, values, (err, results) => {
-      if (err) {
-        console.error('Erreur lors de la création du portfolio:', err);
-        res.status(500).send('Erreur lors de la création du portfolio');
-      } else {
-        res.status(201).send('Portfolio créé avec succès');
-      }
+        if (err) {
+            console.error('Erreur lors de la création du portfolio:', err);
+            res.status(500).send('Erreur lors de la création du portfolio');
+        } else {
+            res.status(201).send('Portfolio créé avec succès');
+        }
     });
   });
 
@@ -63,6 +63,34 @@ module.exports = (db) => {
       }
     });
   });
+
+  // Route pour ajouter un commentaire à un portfolio
+  router.post('/portfolio/:id/comment', (req, res) => {
+    const portfolioId = req.params.id;
+    const { user_id, comment } = req.body;
+
+
+    console.log('portfolioId:', portfolioId);
+    console.log('user_id:', user_id);
+    console.log('comment:', comment);
+
+    if (!portfolioId || !user_id || !comment) {
+        return res.status(400).send('Les champs portfolioId, user_id et comment sont requis');
+    }
+
+    const query = 'INSERT INTO comments (portfolio_id, user_id, content) VALUES (?, ?, ?)';
+    const values = [portfolioId, user_id, comment];
+
+    db.query(query, values, (err, results) => {
+        if (err) {
+            console.error('Erreur lors de l\'ajout du commentaire:', err);
+            res.status(500).send('Erreur lors de l\'ajout du commentaire');
+        } else {
+            res.status(201).send('Commentaire ajouté avec succès');
+        }
+    });
+});
+
 
   return router;
 };
