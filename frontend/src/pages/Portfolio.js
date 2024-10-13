@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Portfolio.css';
 
 function Portfolio() {
   const [title, setTitle] = useState('');

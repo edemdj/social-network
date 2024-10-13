@@ -14,7 +14,7 @@
 .burger-icon .line {
   width: 100%;
   height: 4px;
-  background-color: black;
+  background-color: rgb(249, 243, 243);
   transition: all 0.3s ease;
 }
 
@@ -32,10 +32,10 @@
 
 .menu {
   display: none;
-  flex-direction: column; /* Ensure the menu lists items vertically */
+  flex-direction: column;
   position: absolute;
-  top: 40px; /* Adjust based on your header height */
-  left: 0; /* Align the menu to the left side */
+  top: 40px;
+  left: 0;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -49,7 +49,7 @@
 
 .menu ul {
   display: flex !important;
-  flex-direction: column !important; /* Force vertical alignment */
+  flex-direction: column !important;
 }
 
 .menu ul li {

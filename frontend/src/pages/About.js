@@ -1,10 +1,12 @@
 import React from 'react';
 import '../styles.css';
+import teamImage from '../images/team.jpg';
 
 const About = () => {
   return (
     <div className="about-container">
       <h2>À propos de Nous</h2>
+      <img src={teamImage} alt="Notre équipe" className="team-image" />
       <section className="mission">
         <h3>Notre Mission</h3>
         <p>Notre mission est de créer un espace où les utilisateurs peuvent se connecter, partager et interagir en toute sécurité.</p>

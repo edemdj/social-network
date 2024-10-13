@@ -10,7 +10,7 @@ const PortfolioSearch = () => {
         try {
             const data = await searchPortfoliosByTheme(theme);
             setResults(data);
-            setError(''); // Clear any previous error
+            setError('');
         } catch (error) {
             setError(error.response ? error.response.data : 'An error occurred');
             setResults([]);
