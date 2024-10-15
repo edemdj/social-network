@@ -64,5 +64,19 @@ module.exports = (db) => {
     });
   });
 
+  router.get('/portfolio/search', (req, res) => {
+    const { theme } = req.query;
+    const query = 'SELECT * FROM portfolios WHERE theme_id = ?';
+    db.query(query, [theme], (err, results) => {
+        if (err) {
+            res.status(500).send('Erreur lors de la récupération des portfolios');
+        } else if (results.length === 0) {
+            res.status(404).send('Portfolio non trouvé');
+        } else {
+            res.status(200).json(results);
+        }
+    });
+});
+
   return router;
 };

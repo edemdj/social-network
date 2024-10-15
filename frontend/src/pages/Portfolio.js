@@ -53,6 +53,7 @@ function Portfolio() {
             <option value="7">Sports</option>
             <option value="8">Musique</option>
             <option value="9">Nourriture</option>
+            <option value="10">Autre</option>
           </select>
         </div>
         <button type="submit" className="btn btn-primary">Enregistrer</button>
