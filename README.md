@@ -1,27 +1,109 @@
 # social-network
 
-Table users
+Introduction
 
-Relation avec posts : Chaque utilisateur peut avoir plusieurs publications. Cette relation est représentée par une clé étrangère user_id dans la table posts qui réfère à id dans la table users.
-Relation avec comments : Chaque utilisateur peut également avoir plusieurs commentaires. Cette relation est représentée par une clé étrangère user_id dans la table comments qui réfère à id dans la table users.
-Table posts
+Bienvenue dans le projet de réseau social. Ce référentiel contient le code d'un site de réseautage social où les utilisateurs peuvent interagir par le biais de publications et de commentaires.
 
-Relation avec comments : Chaque publication peut avoir plusieurs commentaires. Cette relation est représentée par une clé étrangère post_id dans la table comments qui réfère à id dans la table posts.
-Table post_themes
+Caractéristiques
 
-Relation avec posts : Cette table de liaison contient les relations entre les publications et les thèmes. Chaque enregistrement dans post_themes a une clé étrangère post_id qui réfère à id dans la table posts.
-Relation avec themes : Chaque enregistrement dans post_themes a également une clé étrangère theme_id qui réfère à id dans la table themes.
-Table themes
+Gestion des utilisateurs : Les utilisateurs peuvent créer des profils, créer des publications et commenter des publications.
 
-Relation avec post_themes : Chaque thème peut être associé à plusieurs publications via la table de liaison post_themes.
-Diagramme Relationnel Visuel
+Gestion des messages : Les utilisateurs peuvent créer et gérer leurs messages.
+
+Gestion des commentaires : Les utilisateurs peuvent commenter les publications.
+
+Gestion des thèmes : Les messages peuvent être associés à différents thèmes.
+
+Installation
+
+Pour installer le projet, procédez comme suit :
+
+Cloner le référentiel : git clone https://github.com/edemdj/social-network.git
+
+Accédez au répertoire du projet : cd social-network
+
+Installer les dépendances : npm install
+
+Utilisation
+
+Pour démarrer le projet :
+
+Exécutez le serveur backend : npm run start
+
+Ouvrez votre navigateur et accédez à http://localhost:3000
+
+Schéma de la base de données
+
+Le schéma de la base de données se compose des tableaux suivants :
+
+Utilisateurs : Stocke les informations sur les utilisateurs et leurs relations avec les publications et les commentaires.
+
+Publications : Stocke les informations de publication et leurs relations avec les commentaires.
+
+Commentaires : Stocke les commentaires faits par les utilisateurs sur les publications.
+
+Thèmes : stocke les thèmes et leurs relations avec les publications.
+
+Diagrammes Relationnels Visuels
+
+Travail futur
+
+Mise en œuvre d'une authentification utilisateur plus robuste.
+
+Ajouter plus d'interactions sociales comme les likes et les partages.
+
+Améliorer l'interface utilisateur/UX pour une meilleure expérience utilisateur.
+  
+  •••••••••••••••••••••••••••••••••••••••••••••••••••••••@
+
+
+Tables Principales
+
+users
+
+Colonnes:
+id: INT, clé primaire, auto-incrémentée
+username: VARCHAR(255), non null
+email: VARCHAR(255), non null
+password: VARCHAR(255), non null
+portfolios
+
+Colonnes:
+id: INT, clé primaire, auto-incrémentée
+links: TEXT, nullable
+user_id: INT, nullable, clé étrangère référencée à users(id)
+theme_id: INT, nullable
+Relation:
+Chaque portfolio appartient à un utilisateur (user_id).
+comments
+
+Colonnes:
+id: INT, clé primaire, auto-incrémentée
+portfolio_id: INT, clé étrangère référencée à portfolios(id)
+user_id: INT, clé étrangère référencée à users(id)
+content: TEXT, non null
+created_at: TIMESTAMP, valeur par défaut CURRENT_TIMESTAMP
+Relations:
+Chaque commentaire appartient à un utilisateur (user_id).
+Chaque commentaire est lié à un portfolio (portfolio_id).
+themes
+
+Colonnes:
+id: INT, clé primaire, auto-incrémentée
+name: VARCHAR(255), non null
+portfolio_themes
+
+Colonnes:
+portfolio_id: INT, clé étrangère référencée à portfolios(id)
+theme_id: INT, clé étrangère référencée à themes(id)
+Relation:
+Cette table de liaison relie les portfolios aux thèmes.
+Diagramme Relationnel
 
 users (id) <------ portfolios (user_id)
-        \             |
-         `--> comments (user_id)
-         `--> comments (portfolio_id)
-portfolios (id) <------ post_themes (portfolio_id)
-themes (id) <----- post_themes (theme_id)
+users (id) <------ comments (user_id)
+portfolios (id) <------ comments (portfolio_id)
+portfolios (id) <------ portfolio_themes (portfolio_id)
+themes (id) <------ portfolio_themes (theme_id)
 
-
-En résumé, ce diagramme montre comment les utilisateurs, les publications, les commentaires et les thèmes interagissent entre eux dans votre base de données. Les clés étrangères (user_id, post_id, theme_id) établissent des liens entre les différentes tables pour maintenir l'intégrité des données et permettre des jointures efficaces pour les requêtes.
+Ce diagramme montre comment les utilisateurs, les portfolios, les commentaires et les thèmes interagissent entre eux dans votre base de données. Les clés étrangères (user_id, portfolio_id, theme_id) établissent des liens entre les différentes tables pour maintenir l'intégrité des données et permettre des jointures efficaces pour les requêtes.
