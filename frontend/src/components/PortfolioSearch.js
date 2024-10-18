@@ -6,11 +6,13 @@ const PortfolioSearch = () => {
     const [results, setResults] = useState([]);
     const [error, setError] = useState('');
 
+    const themes = ['Art', 'Technology', 'Science', 'Music', 'Literature', 'Sports', 'Nourriture', 'Santé', 'Business', 'Education', 'Bourse',  'Autre'];
+
     const handleSearch = async () => {
         try {
             const data = await searchPortfoliosByTheme(theme);
             setResults(data);
-            setError(''); // Clear any previous error
+            setError('');
         } catch (error) {
             setError(error.response ? error.response.data : 'An error occurred');
             setResults([]);
@@ -19,13 +21,15 @@ const PortfolioSearch = () => {
 
     return (
         <div>
-            <h2>Search Portfolios by Theme</h2>
-            <input
-                type="text"
-                value={theme}
-                onChange={(e) => setTheme(e.target.value)}
-                placeholder="Enter theme"
-            />
+            <h2>Trouver des portfolios par thème</h2>
+            <select value={theme} onChange={(e) => setTheme(e.target.value)}>
+                <option value="">Select a theme</option>
+                {themes.map((theme) => (
+                    <option key={theme} value={theme}>
+                        {theme}
+                    </option>
+                ))}
+            </select>
             <button onClick={handleSearch}>Search</button>
             {error && <p>{error}</p>}
             <ul>
