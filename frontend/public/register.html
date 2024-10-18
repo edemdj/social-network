@@ -46,9 +46,7 @@
 
       const result = await response.json();
       if (response.ok) {
-        // Stocker le token
         localStorage.setItem('token', result.token);
-        // Rediriger l'utilisateur
         window.location.href = '/dashboard.html';
       } else {
         alert(result.message || 'Erreur lors de l\'inscription');

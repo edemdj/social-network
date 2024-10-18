@@ -3,7 +3,6 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-
 module.exports = (db) => {
   // Route pour la connexion utilisateur
   router.post('/login', async (req, res) => {
@@ -52,14 +51,13 @@ module.exports = (db) => {
 
   // Route pour la création d'utilisateur
   router.post('/register', async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, username } = req.body;
 
     try {
       // Hache le mot de passe
       const hashedPassword = await bcrypt.hash(password, 10);
-
       // Insère l'utilisateur avec le mot de passe haché
-      db.query('INSERT INTO users (email, password) VALUES (?, ?)', [email, hashedPassword], (err, result) => {
+      db.query('INSERT INTO users (email, password, username) VALUES (?, ?, ?)', [email, hashedPassword, username], (err, result) => {
         if (err) {
           console.error('Erreur de requête SQL:', err);
           return res.status(500).json({ message: 'Erreur serveur' });
