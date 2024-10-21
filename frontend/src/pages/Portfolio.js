@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Portfolio.css';
 
 function Portfolio() {
@@ -6,6 +7,20 @@ function Portfolio() {
   const [description, setDescription] = useState('');
   const [link, setLink] = useState('');
   const [theme, setTheme] = useState('');
+  const [userId, setUserId] = useState(null); // Stocke l'user_id dans un état
+  const navigate = useNavigate();
+
+  // Vérifier et récupérer l'user_id au chargement
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('user_id');
+    console.log('storedUserId:', storedUserId);
+    if (storedUserId) {
+      setUserId(storedUserId); // Met à jour l'état avec l'user_id
+    } else {
+      alert("Veuillez vous connecter pour créer un portfolio.");
+      navigate("/login"); // Redirige si l'user_id n'est pas trouvé
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,7 +29,7 @@ function Portfolio() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title, description, link, theme }),
+      body: JSON.stringify({ title, description, link, theme, user_id: userId }), // Utilise l'état userId
     });
 
     if (response.ok) {

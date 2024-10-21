@@ -29,7 +29,7 @@ module.exports = (db) => {
         }
 
         const token = jwt.sign({ userId: user.id }, 'secretkey', { expiresIn: '1h' });
-        res.json({ token });
+        res.json({ token, user_id: user.id });
       });
     } catch (err) {
       console.error('Erreur serveur:', err);

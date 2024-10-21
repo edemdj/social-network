@@ -20,6 +20,7 @@ const Login = () => {
 
             if (response.ok) {
                 const data = await response.json();
+                localStorage.setItem('user_id', data.user_id);
                 localStorage.setItem('token', data.token);
                 navigate('/');  // Redirection vers la page d'accueil après connexion réussie
             } else {

@@ -19,11 +19,10 @@ function App() {
         <nav>
           <BurgerMenu />
           <ul>
-            <li><NavLink to="/" exact activeClassName="active">Accueil</NavLink></li>
-            <li><NavLink to="/about" activeClassName="active">À propos</NavLink></li>
-            <li><NavLink to="/login" activeClassName="active">Connexion</NavLink></li>
-            <li><NavLink to="/register" activeClassName="active">Inscription</NavLink></li>
-
+            <li><NavLink to="/" exact="true" activeclassname="active">Accueil</NavLink></li>
+            <li><NavLink to="/about" activeclassname="active">À propos</NavLink></li>
+            <li><NavLink to="/login" activeclassname="active">Connexion</NavLink></li>
+            <li><NavLink to="/register" activeclassname="active">Inscription</NavLink></li>
           </ul>
         </nav>
         <PortfolioSearch />

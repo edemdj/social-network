@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const authRoutes = require('./routes/auth');
 const portfolioRoutes = require('./routes/portfolio');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -18,6 +19,20 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json()); // Pour interpréter les corps de requêtes en JSON
+
+// Middleware de vérification de token JWT
+const verifyToken = (req, res, next) => {
+  const token = req.headers['authorization'];
+  if (!token) return res.status(403).send('Token requis pour l\'authentification');
+
+  try {
+    const decoded = jwt.verify(token, 'secretkey'); // Utilisez la clé secrète appropriée
+    req.user = decoded;
+  } catch (err) {
+    return res.status(401).send('Token invalide');
+  }
+  return next();
+};
 
 // Connexion à la base de données MySQL
 const db = mysql.createConnection({
@@ -39,8 +54,14 @@ db.connect((err) => {
     console.error(err.stack);
     res.status(500).send('quelque chose s\'est mal passé');
   });
+
   // Lien vers tes routes d'authentification
   app.use('/api/auth', authRoutes(db));
+  
+  // Utilisation du middleware sur les routes protégées
+  app.use('/api/portfolio', verifyToken);
+
+  // Lien vers tes routes de portfolio
   app.use('/api', portfolioRoutes(db));
 
   // Serve les fichiers statiques de React
