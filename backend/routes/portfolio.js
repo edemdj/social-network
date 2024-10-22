@@ -65,24 +65,40 @@ module.exports = (db) => {
   });
 
   router.get('/search', (req, res) => {
-    const { query } = req.query;
-
-    if (!query) {
-        return res.status(400).send('Le paramètre de requête "query" est requis');
+    const { theme } = req.query;
+  
+    if (!theme) {
+      return res.status(400).send('Le paramètre de requête "theme" est requis');
     }
-
-    const sqlQuery = 'SELECT * FROM portfolios WHERE title LIKE ? OR description LIKE ?';
-    const values = [`%${query}%`, `%${query}%`];
-
-    db.query(sqlQuery, values, (err, results) => {
-        if (err) {
+    const sqlQueryThemeId = "SELECT id FROM themes WHERE name = ?";
+    const themeName = theme;
+    const getThemes = () => {
+      return new Promise((resolve, reject) => {
+        db.query(sqlQueryThemeId, themeName, (err, results) => {
+          if (err) {
             console.error('Erreur lors de la recherche des portfolios:', err);
-            return res.status(500).send('Erreur lors de la recherche des portfolios');
+            reject('Erreur lors de la recherche des portfolios');
+          } else {
+            resolve(results);
+          }
+        });
+      });
+    };
+    getThemes().then((results) => {
+      const sqlQuery = 'SELECT * FROM portfolios WHERE theme_id = ?';
+      if (results.length === 0) {
+        return res.status(404).send('Thème non trouvé');
+      }
+      const values = [results[0].id];
+      db.query(sqlQuery, values, (err, results) => {
+        if (err) {
+          console.error('Erreur lors de la recherche des portfolios:', err);
+          return res.status(500).send('Erreur lors de la recherche des portfolios');
         }
-
         res.status(200).json(results);
+      });
     });
-});
+  });
 
   // Route pour ajouter un commentaire à un portfolio
   router.post('/portfolio/:id/comment', (req, res) => {
