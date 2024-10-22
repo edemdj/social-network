@@ -7,7 +7,7 @@ function Portfolio() {
   const [description, setDescription] = useState('');
   const [link, setLink] = useState('');
   const [theme, setTheme] = useState('');
-  const [userId, setUserId] = useState(null); // Stocke l'user_id dans un état
+  const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
 
   // Vérifier et récupérer l'user_id au chargement
@@ -24,18 +24,32 @@ function Portfolio() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('/api/portfolio', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ title, description, link, theme, user_id: userId }), // Utilise l'état userId
-    });
 
-    if (response.ok) {
+    // Vérifier si userId est défini
+    if (!userId) {
+      alert("Vous devez être connecté pour soumettre un portfolio.");
+      return;
+    }
+
+    console.log('userId:', userId); // Vérifier l'ID utilisateur
+
+    try {
+      const response = await fetch('/api/portfolio', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title, description, link, theme, user_id: userId }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erreur lors de l\'enregistrement');
+      }
+
       alert('Portfolio enregistré avec succès');
-    } else {
-      alert('Erreur lors de l\'enregistrement du portfolio');
+    } catch (error) {
+      console.error('Erreur lors de la requête:', error);
+      alert('Erreur lors de la connexion au serveur');
     }
   };
 

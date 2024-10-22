@@ -4,8 +4,7 @@ const router = express.Router();
 module.exports = (db) => {
 
   router.post('/portfolio', (req, res) => {
-    const { links, theme_id } = req.body;
-    const user_id = req.user.userId;  // Récupérer l'ID utilisateur depuis le token
+    const { links, theme_id, user_id } = req.body;
     let query, values;
   
     if (theme_id) {

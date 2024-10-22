@@ -59,7 +59,7 @@ db.connect((err) => {
   app.use('/api/auth', authRoutes(db));
   
   // Utilisation du middleware sur les routes protégées
-  app.use('/api/portfolio', verifyToken);
+  app.use('/api/portfolio', portfolioRoutes(db));
 
   // Lien vers tes routes de portfolio
   app.use('/api', portfolioRoutes(db));
