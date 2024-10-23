@@ -5,7 +5,7 @@ import './Portfolio.css';
 function Portfolio() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [link, setLink] = useState('');
+  const [links, setLink] = useState('');
   const [theme, setTheme] = useState('');
   const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ function Portfolio() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title, description, link, theme, user_id: userId }),
+        body: JSON.stringify({ title, description, links, theme, user_id: userId }),
       });
 
       if (!response.ok) {
@@ -66,8 +66,8 @@ function Portfolio() {
           <textarea className="form-control" id="description" value={description} onChange={(e) => setDescription(e.target.value)} required />
         </div>
         <div className="form-group">
-          <label htmlFor="link">Lien :</label>
-          <input type="url" className="form-control" id="link" value={link} onChange={(e) => setLink(e.target.value)} required />
+          <label htmlFor="links">Lien :</label>
+          <input type="url" className="form-control" id="links" value={links} onChange={(e) => setLink(e.target.value)} required />
         </div>
         <div className="form-group">
           <label htmlFor="theme">Thème :</label>
