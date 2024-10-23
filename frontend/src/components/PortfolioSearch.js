@@ -6,16 +6,16 @@ const PortfolioSearch = () => {
     const [results, setResults] = useState([]);
     const [error, setError] = useState('');
 
-    const themes = ['Art', 'Technology', 'Science', 'Music', 'Literature', 'Sports', 'Nourriture', 'Santé', 'Business', 'Education', 'Bourse',  'Autre'];
+    const themes = ['Art', 'Technologie', 'Science', 'Music', 'Literature', 'Sports', 'Nourriture', 'Santé', 'Business', 'Education', 'Bourse', 'Autre'];
 
     const handleSearch = async () => {
         try {
             const data = await searchPortfoliosByTheme(theme);
-            setResults(data);
+            setResults(Array.isArray(data) ? data : []); // Ensure data is an array
             setError('');
         } catch (error) {
             setError(error.response ? error.response.data : 'An error occurred');
-            setResults([]);
+            setResults([]); // Set results to an empty array on error
         }
     };
 
@@ -33,8 +33,10 @@ const PortfolioSearch = () => {
             <button onClick={handleSearch}>Search</button>
             {error && <p>{error}</p>}
             <ul>
-                {results.map((portfolio) => (
-                    <li key={portfolio.id}>{portfolio.name}</li>
+            {results.map((portfolio) => (
+                <li key={portfolio.id}>
+                {portfolio.links} {/* Affiche le lien du portfolio */}
+                </li>
                 ))}
             </ul>
         </div>

@@ -2,11 +2,13 @@ import axios from './axiosConfig';
 
 export const searchPortfoliosByTheme = async (theme) => {
     try {
-        const response = await axios.get(`/api/portfolio/search`, {
-            params: { theme }
+        const response = await axios.get('/portfolio/search', {
+            params: { theme }, // Ajoute le paramètre theme à la requête
         });
-        return response.data;
+        console.log(response.data);
+        return response.data; // Renvoie les résultats de l'API
     } catch (error) {
-        throw error;
+        console.error('Erreur lors de la recherche des portfolios :', error);
+        throw error; // Gestion des erreurs
     }
 };
