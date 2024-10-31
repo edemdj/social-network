@@ -4,26 +4,22 @@ const router = express.Router();
 module.exports = (db) => {
 
   router.post('/portfolio', (req, res) => {
-    const { links, theme_id, user_id } = req.body;
-    let query, values;
-  
-    if (theme_id) {
-      query = `INSERT INTO portfolios (links, theme_id, user_id) VALUES (?, ?, ?)`;
-      values = [links, theme_id, user_id];
-    } else {
-      query = 'INSERT INTO portfolios (links, user_id) VALUES (?, ?)';
-      values = [links, user_id];
-    }
+    const { links, theme, user_id } = req.body; // `theme` est déjà l'ID du thème
+    
+    // Insertion du portfolio avec l'ID du thème
+    const query = `INSERT INTO portfolios (links, theme_id, user_id) VALUES (?, ?, ?)`;
+    const values = [links, theme, user_id];
   
     db.query(query, values, (err, results) => {
       if (err) {
         console.error('Erreur lors de la création du portfolio:', err);
-        res.status(500).send('Erreur lors de la création du portfolio');
-      } else {
-        res.status(201).send('Portfolio créé avec succès');
+        return res.status(500).send('Erreur lors de la création du portfolio');
       }
+      res.status(201).send('Portfolio créé avec succès');
     });
   });
+  
+
 
   router.get('/portfolio/:id', (req, res) => {
     const portfolioId = req.params.id;
@@ -64,41 +60,51 @@ module.exports = (db) => {
     });
   });
 
-  router.get('/search', (req, res) => {
+  router.get('/search', async (req, res) => {
     const { theme } = req.query;
   
     if (!theme) {
       return res.status(400).send('Le paramètre de requête "theme" est requis');
     }
-    const sqlQueryThemeId = "SELECT id FROM themes WHERE name = ?";
-    const themeName = theme;
-    const getThemes = () => {
-      return new Promise((resolve, reject) => {
-        db.query(sqlQueryThemeId, themeName, (err, results) => {
+  
+    try {
+      // Récupérer l'ID du thème
+      const themeQuery = "SELECT id FROM themes WHERE name = ?";
+      const themeResults = await new Promise((resolve, reject) => {
+        db.query(themeQuery, [theme], (err, results) => {
           if (err) {
-            console.error('Erreur lors de la recherche des portfolios:', err);
-            reject('Erreur lors de la recherche des portfolios');
-          } else {
-            resolve(results);
+            console.error('Erreur lors de la récupération de l\'ID du thème:', err);
+            return reject('Erreur lors de la récupération de l\'ID du thème');
           }
+          resolve(results);
         });
       });
-    };
-    getThemes().then((results) => {
-      const sqlQuery = 'SELECT * FROM portfolios WHERE theme_id = ?';
-      if (results.length === 0) {
+  
+      if (themeResults.length === 0) {
         return res.status(404).send('Thème non trouvé');
       }
-      const values = [results[0].id];
-      db.query(sqlQuery, values, (err, results) => {
-        if (err) {
-          console.error('Erreur lors de la recherche des portfolios:', err);
-          return res.status(500).send('Erreur lors de la recherche des portfolios');
-        }
-        res.status(200).json(results);
+  
+      const themeId = themeResults[0].id;
+  
+      // Récupérer les portfolios associés à l'ID du thème
+      const portfolioQuery = 'SELECT * FROM portfolios WHERE theme_id = ?';
+      const portfolios = await new Promise((resolve, reject) => {
+        db.query(portfolioQuery, [themeId], (err, results) => {
+          if (err) {
+            console.error('Erreur lors de la récupération des portfolios:', err);
+            return reject('Erreur lors de la récupération des portfolios');
+          }
+          resolve(results);
+        });
       });
-    });
+  
+      res.status(200).json(portfolios);
+  
+    } catch (error) {
+      res.status(500).send(error);
+    }
   });
+  
 
   // Route pour ajouter un commentaire à un portfolio
   router.post('/portfolio/:id/comment', (req, res) => {

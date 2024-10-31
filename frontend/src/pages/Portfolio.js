@@ -71,9 +71,9 @@ function Portfolio() {
           <input type="url" className="form-control" id="links" value={links} onChange={(e) => setLink(e.target.value)} required />
         </div>
         <div className="form-group">
-          <label htmlFor="theme">Thème :</label>
+          <label htmlFor="themes">theme :</label>
           <select className="form-control" id="theme" value={theme} onChange={(e) => setTheme(e.target.value)} required>
-            <option value="">Sélectionner un thème</option>
+            <option value="">Sélectionner un theme</option>
             <option value="1">Développeur Frontend</option>
             <option value="2">Développeur Backend</option>
             <option value="3">Développeur Full Stack</option>

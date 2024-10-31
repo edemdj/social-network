@@ -6,6 +6,7 @@ import welcomeImage from '../images/welcome.jpg';
 const Home = () => {
   const navigate = useNavigate();
 
+
   const handleStartClick = () => {
     navigate('/portfolio');
   };
