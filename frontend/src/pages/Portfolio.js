@@ -87,8 +87,10 @@ function Portfolio() {
         </div>
         <button type="submit" className="btn btn-primary">Enregistrer</button>
       </form>
+    
     </div>
   );
 }
 
 export default Portfolio;
+

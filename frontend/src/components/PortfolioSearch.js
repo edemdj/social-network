@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { searchPortfoliosByTheme } from '../services/portfolioService';
-
+import Comments from './Comments';
 const PortfolioSearch = () => {
     const [theme, setTheme] = useState('');
     const [results, setResults] = useState([]);
@@ -48,6 +48,7 @@ const PortfolioSearch = () => {
                     </li>
                 ))}
             </ul>
+            <Comments portfolioId={1} userId={1} />
         </div>
     );
 };
