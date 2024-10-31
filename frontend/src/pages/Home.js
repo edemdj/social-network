@@ -19,14 +19,18 @@ const Home = () => {
       <h2>BIENVENUE DANS VOTRE BIBLIOTHEQUE !</h2>
       <img src={welcomeImage} alt="Bienvenue" className="welcome-image" />
       <section className="intro">
-        <p>Ceci est une page dediée à vos experience. Connectez-vous avec vos amis et partagez realisations.</p>
+        <p>Ceci est une page dediée à vos experience. Connectez-vous avec vos amis et partagez vos realisations.</p>
       </section>
       <section className="features">
         <h3>Fonctionnalités principales</h3>
         <ul>
           <li>Créer des publications</li>
           <li>Commenter et aimer les publications</li>
+          <li>Rechercher des publications par thème</li>
+          <li>Consulter les portfolios des autres utilisateurs</li>
           <li>Ajouter et suivre des amis</li>
+          <li>Et bien plus encore...</li>
+          <li className="highlight">Connectez-vous pour commencer !</li>
         </ul>
       </section>
       <section className="cta">

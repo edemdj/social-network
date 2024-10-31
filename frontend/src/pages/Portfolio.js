@@ -47,6 +47,7 @@ function Portfolio() {
       }
 
       alert('Portfolio enregistré avec succès');
+      navigate('/'); // Rediriger vers la page d'accueil
     } catch (error) {
       console.error('Erreur lors de la requête:', error);
       alert('Erreur lors de la connexion au serveur');
@@ -73,16 +74,15 @@ function Portfolio() {
           <label htmlFor="theme">Thème :</label>
           <select className="form-control" id="theme" value={theme} onChange={(e) => setTheme(e.target.value)} required>
             <option value="">Sélectionner un thème</option>
-            <option value="1">Technologie</option>
-            <option value="2">Art</option>
-            <option value="3">Science</option>
-            <option value="4">Affaires</option>
-            <option value="5">Éducation</option>
-            <option value="6">Santé</option>
-            <option value="7">Sports</option>
-            <option value="8">Musique</option>
-            <option value="9">Nourriture</option>
-            <option value="10">Autre</option>
+            <option value="1">Développeur Frontend</option>
+            <option value="2">Développeur Backend</option>
+            <option value="3">Développeur Full Stack</option>
+            <option value="4">cybersécurité</option>
+            <option value="5">Intélligence Artificielle</option>
+            <option value="6">AR VR</option>
+            <option value="7">Blochain</option>
+            
+          
           </select>
         </div>
         <button type="submit" className="btn btn-primary">Enregistrer</button>

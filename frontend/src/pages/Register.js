@@ -29,7 +29,7 @@ function Register() {
       <br />
       <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
       
-      <button type="submit">S'INSCRIRE</button>
+    <button type="submit">S'INSCRIRE</button>
     </form>
   );
 }

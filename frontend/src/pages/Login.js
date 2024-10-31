@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();  // Hook pour redirection
+    const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();  // Hook for redirection
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -22,13 +23,13 @@ const Login = () => {
                 const data = await response.json();
                 localStorage.setItem('user_id', data.user_id);
                 localStorage.setItem('token', data.token);
-                navigate('/');  // Redirection vers la page d'accueil après connexion réussie
+                navigate('/');  // Redirect to home page after successful login
             } else {
-                console.error('Erreur de connexion');
-                // Ici, tu peux ajouter un message d'erreur pour informer l'utilisateur
+                console.error('Login error');
+                // Here you can add an error message to inform the user
             }
         } catch (error) {
-            console.error('Erreur lors de la connexion:', error);
+            console.error('Error during login:', error);
         }
     };
 
@@ -43,13 +44,27 @@ const Login = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-                <input
-                    type="password"
-                    placeholder="Mot de passe"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
+                <div style={{ position: 'relative' }}>
+                    <input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Mot de passe"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <span
+                        onClick={() => setShowPassword(!showPassword)}
+                        style={{
+                            position: 'absolute',
+                            right: '10px',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                        }}
+                    >
+                        
+                            <i className="fa fa-eye" aria-hidden="true"></i>
+                    </span>
+                </div>
                 <button type="submit">Se connecter</button>
             </form>
             <p>Vous n'avez pas de compte? <a href="/register">Inscrivez-vous</a></p>

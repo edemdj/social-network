@@ -7,6 +7,8 @@ import Register from './pages/Register';
 import Portfolio from './pages/Portfolio';
 import BurgerMenu from './components/BurgerMenu';
 import PortfolioSearch from './components/PortfolioSearch';
+import { isAuthenticated } from './services/authService';
+import LogoutButton from './components/LogoutButton';
 import './styles.css';
 
 function App() {
@@ -21,8 +23,14 @@ function App() {
           <ul>
             <li><NavLink to="/" exact="true" activeclassname="active">Accueil</NavLink></li>
             <li><NavLink to="/about" activeclassname="active">À propos</NavLink></li>
-            <li><NavLink to="/login" activeclassname="active">Connexion</NavLink></li>
-            <li><NavLink to="/register" activeclassname="active">Inscription</NavLink></li>
+            {!isAuthenticated() ? (
+              <>
+                <li><NavLink to="/login" activeclassname="active">Connexion</NavLink></li>
+                <li><NavLink to="/register" activeclassname="active">Inscription</NavLink></li>
+              </>
+            ) : (
+              <li><LogoutButton /></li> 
+            )}
           </ul>
         </nav>
         <PortfolioSearch />
