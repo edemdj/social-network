@@ -16,7 +16,7 @@ function App() {
     <Router>
       <header className="header">
         <div className="header-title">
-          <h1>Bienvenue sur Mon Mini Réseau Social</h1>
+          <h1>BIENVENUE SUR PORTFOLIOPRO</h1>
         </div>
         <nav>
           <BurgerMenu />
