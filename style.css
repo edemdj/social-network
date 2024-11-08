@@ -1,0 +1,145 @@
+/* Style de réinitialisation de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+header {
+  text-align: center;
+  background-color: #ffd700;
+  padding: 20px;
+}
+
+header h1 {
+  font-size: 2.5em;
+  color: #333;
+}
+
+header p {
+  font-size: 1.2em;
+  color: #666;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 10px 0;
+}
+
+header nav a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+header button {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+header button:hover {
+  background-color: #555;
+}
+
+/* Image d'accueil */
+.intro .welcome-image {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  display: block;
+  border-radius: 10px;
+}
+
+/* Styles des fonctionnalités */
+.features {
+  max-width: 1200px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.features h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.feature {
+  display: inline-block;
+  width: 30%;
+  margin: 1%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+}
+
+.feature img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.feature h3 {
+  font-size: 1.5em;
+  color: #007bff;
+  margin: 10px 0;
+}
+
+.feature p {
+  color: #555;
+}
+
+/* Section À propos */
+.about {
+  max-width: 800px;
+  margin: 40px auto;
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+.about h2 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.about p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.about ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.about a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.about a:hover {
+  text-decoration: underline;
+}

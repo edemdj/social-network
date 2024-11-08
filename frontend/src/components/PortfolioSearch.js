@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { searchPortfoliosByTheme } from '../services/portfolioService';
-import Comments from './Comments';
+
 const PortfolioSearch = () => {
     const [theme, setTheme] = useState('');
     const [results, setResults] = useState([]);
@@ -25,7 +25,7 @@ const PortfolioSearch = () => {
 
     return (
         <div>
-            <h2>Trouver des portfolios par thème</h2>
+            <h2>Trouver des portfolios</h2>
             <select value={theme} onChange={(e) => setTheme(e.target.value)}>
                 <option value="">Sélectionner un thème</option>
                 {themes.map((theme) => (
@@ -40,15 +40,16 @@ const PortfolioSearch = () => {
                 <p>Aucun portfolio trouvé pour le thème sélectionné.</p>
             )}
             <ul>
-                {results.map((portfolio) => (
-                    <li key={portfolio.id}>
-                        <a href={portfolio.links} target="_blank" rel="noopener noreferrer">
-                            {portfolio.links}
-                        </a>
-                    </li>
-                ))}
-            </ul>
-            <Comments portfolioId={1} userId={1} />
+            {results.map((portfolio) => (
+                <li key={portfolio.id} className="result-card">
+                    <a href={portfolio.links} target="_blank" rel="noopener noreferrer">
+                        {portfolio.links}
+                    </a>
+                </li>
+            ))}
+        </ul>
+
+
         </div>
     );
 };

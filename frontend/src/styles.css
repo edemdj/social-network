@@ -8,8 +8,8 @@
 /* Section globale */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
+  background-color: #f6f4f4;
+  color: #0e0d0d;
 }
 
 /* Typographie */
@@ -21,9 +21,23 @@ p {
   margin-bottom: 1em;
 }
 
+/* Conteneur principal avec bordures colorées */
+.main-container {
+  display: flex;
+  flex-direction: column; /* Pour centrer le contenu verticalement */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  border-left: 1cm solid #1cb31c;
+  border-right: 1cm solid #90ee90;
+  background-color: #de0c0c;
+  text-align: center;
+}
+
 /* Navigation */
 nav {
-  background-color: #333;
+  background-color: rgba(188, 138, 2, 0.958);
   padding: 1em;
 }
 
@@ -39,12 +53,12 @@ nav a {
   color: white;
   text-decoration: none;
   font-size: 1.2em;
-  cursor: pointer; /* Assure que le lien est cliquable */
+  cursor: pointer;
   transition: color 0.3s ease;
 }
 
 nav a:hover {
-  color: #007bff; /* Couleur au survol */
+  color: #007bff;
 }
 
 /* Formulaires */
@@ -69,7 +83,6 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  pointer-events: auto; /* Permettre l'interaction */
   transition: background-color 0.3s ease;
 }
 
@@ -77,7 +90,6 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* Assure que les boutons dans les liens soient bien interactifs */
 button:focus,
 a:focus {
   outline: none;
@@ -97,3 +109,224 @@ a:focus {
 h2 {
   text-align: center;
 }
+
+/* Conteneur principal pour la section About */
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2em;
+  text-align: center;
+  color: #333;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles pour le titre principal */
+.about-container h2 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+  color: #007bff;
+}
+
+/* Image de l'équipe */
+.team-image {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  margin: 1em 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Sections (Mission, Équipe, Contact) */
+.mission,
+.team,
+.contact {
+  margin: 1.5em 0;
+  text-align: left;
+}
+
+.mission h3,
+.team h3,
+.contact h3 {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 0.5em;
+}
+
+.mission p,
+.team p,
+.contact p {
+  font-size: 1em;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Style du lien de contact */
+.contact a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.contact a:hover {
+  text-decoration: underline;
+}
+
+
+
+/* Ajouter les styles pour register-container */
+.register-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2em;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Centrage du titre */
+.register-container h2 {
+  text-align: center;
+}
+
+/* Conteneur principal pour la recherche */
+.search-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2em auto;
+  padding: 20px;
+  max-width: 600px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Formulaire de recherche */
+.search-form {
+  margin-bottom: 20%;
+}
+
+/* Cadre pour chaque résultat */
+.result-card {
+  width: 50%;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #eaf4ff;
+  box-shadow: 0px 2px 5px rgba(0, 123, 255, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.result-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+.result-card a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.result-card a:hover {
+  text-decoration: underline;
+}
+
+/* Conteneur principal pour la recherche */
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 2em auto;
+  max-width: 600px;
+}
+
+/* Formulaire de recherche */
+.search-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 1em;
+}
+
+/* Menu déroulant (select) */
+.search-form select {
+  font-size: 1.5em; /* Augmente la taille des caractères */
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+/* Style pour le header */
+.header {
+  padding: 1em;
+  text-align: center; /* Centre le contenu dans le header */
+}
+
+/* Centrer le titre h1 dans le header */
+.header-title h1 {
+  color: #333; /* Ajustez la couleur du texte si nécessaire */
+  font-size: 2em;
+  margin: 0;
+}
+
+
+/* Menu déroulant (select) */
+.search-form select {
+  font-size: 1.5em; /* Augmente la taille des caractères */
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+/* Bouton de recherche */
+.search-form button {
+  font-size: 1.2em;
+  padding: 0.5em 1em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Message d'erreur */
+.error-message {
+  color: red;
+  margin-top: 1em;
+  font-size: 1em;
+} 
+
+
+.result-card {
+  width: 90%; /* Ajuste la largeur des résultats pour plus de centrage */
+  margin: 5px auto;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #eaf4ff;
+  box-shadow: 0px 2px 5px rgba(0, 123, 255, 0.1);
+}
+
+/* Ajouter les styles pour le footer */
+footer {
+  background-color: rgba(188, 138, 2, 0.958);
+  color: white;
+  text-align: center;
+  padding: 1em;
+}
+

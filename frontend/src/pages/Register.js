@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles.css'; // Assurez-vous que le CSS est importé
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -17,20 +18,20 @@ function Register() {
     const data = await response.json();
     if (data.token) {
       localStorage.setItem('token', data.token);
-      // Rediriger vers la page d'accueil
       navigate('/login');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <br />
-      <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-      
-    <button type="submit">S'INSCRIRE</button>
-    </form>
+    <div className="register-container">
+      <h2>Inscription</h2>
+      <form onSubmit={handleSubmit}>
+        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input type="password" placeholder="Mot de passe" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input type="text" placeholder="Nom d'utilisateur" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <button type="submit">S'inscrire</button>
+      </form>
+    </div>
   );
 }
 
