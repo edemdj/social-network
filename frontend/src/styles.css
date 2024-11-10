@@ -330,3 +330,7 @@ footer {
   padding: 1em;
 }
 
+.logo {
+  width: 100px; /* ajustez la taille selon vos besoins */
+  height: auto;
+}
