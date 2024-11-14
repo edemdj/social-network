@@ -17,7 +17,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h2>BIENVENUE DANS VOTRE BIBLIOTHEQUE DE PRO!</h2>
+      <h2>BIENVENUE DANS VOTRE BIBLIOTHEQUE PRO!</h2>
       <img src={welcomeImage} alt="Bienvenue" className="welcome-image" />
       <section className="intro">
         <p>Ceci est une page dediée à vos experience. Connectez-vous avec vos amis et partagez vos realisations.</p>

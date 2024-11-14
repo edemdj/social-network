@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-  <div class="container">
+  <div class="container mt-4">
     <h2>Créer un Portfolio</h2>
     <form id="portfolioForm">
       <div class="form-group">
@@ -16,7 +16,7 @@
       </div>
       <div class="form-group">
         <label for="description">Description :</label>
-        <textarea class="form-control" id="description" name="description" required></textarea>
+        <textarea class="form-control" id="description" name="content" required></textarea> <!-- Mise à jour du nom en "content" si nécessaire -->
       </div>
       <div class="form-group">
         <label for="link">Lien :</label>
@@ -25,32 +25,47 @@
       <div class="form-group">
         <label for="theme">Thème :</label>
         <select class="form-control" id="theme" name="theme" required>
-          <option value="light">Clair</option>
-          <option value="dark">Sombre</option>
+          <option value="1">Clair</option> <!-- Utiliser l'ID correspondant si c'est une référence dans la BD -->
+          <option value="2">Sombre</option>
         </select>
       </div>
       <button type="submit" class="btn btn-primary">Enregistrer</button>
     </form>
   </div>
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
     document.getElementById('portfolioForm').addEventListener('submit', async function(event) {
       event.preventDefault();
-      const formData = new FormData(this);
+      
+      // Création de l'objet contenant les données du formulaire
+      const formData = {
+        title: document.getElementById('title').value,
+        content: document.getElementById('description').value, // Assurez-vous que le backend attend ce champ comme 'content'
+        link: document.getElementById('link').value,
+        theme: document.getElementById('theme').value // Assurez-vous que le backend attend un ID si nécessaire
+      };
 
-      const response = await fetch('/api/portfolio', {
-        method: 'POST',
-        body: JSON.stringify(Object.fromEntries(formData)),
-        headers: {
-          'Content-Type': 'application/json'
+      try {
+        // Envoi de la requête avec les données JSON
+        const response = await fetch('/api/portfolio', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          alert('Portfolio enregistré avec succès');
+          document.getElementById('portfolioForm').reset(); // Réinitialiser le formulaire après succès
+        } else {
+          alert('Erreur lors de l\'enregistrement du portfolio');
         }
-      });
-
-      if (response.ok) {
-        alert('Portfolio enregistré avec succès');
-      } else {
-        alert('Erreur lors de l\'enregistrement du portfolio');
+      } catch (error) {
+        console.error('Erreur lors de l\'envoi du formulaire:', error);
+        alert('Une erreur est survenue. Veuillez réessayer.');
       }
     });
   </script>

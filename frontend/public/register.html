@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="register.css">
 </head>
 <body>
-  <div class="container">
+  <div class="container mt-4">
     <h2>S'inscrire</h2>
     <form id="registerForm" method="POST">
       <div class="form-group">
@@ -23,33 +23,51 @@
         <label for="password">Mot de passe :</label>
         <input type="password" class="form-control" id="password" name="password" required>
       </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirmer le mot de passe :</label>
+        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+      </div>
       <button type="submit" class="btn btn-primary">S'inscrire</button>
     </form>
   </div>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
-    document.querySelector('form').addEventListener('submit', async (event) => {
+    document.querySelector('#registerForm').addEventListener('submit', async (event) => {
       event.preventDefault();
 
       const username = document.querySelector('#username').value;
       const email = document.querySelector('#email').value;
       const password = document.querySelector('#password').value;
+      const confirmPassword = document.querySelector('#confirmPassword').value;
 
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, email, password })
-      });
+      // Vérification de la correspondance des mots de passe
+      if (password !== confirmPassword) {
+        alert('Les mots de passe ne correspondent pas.');
+        return;
+      }
 
-      const result = await response.json();
-      if (response.ok) {
-        localStorage.setItem('token', result.token);
-        window.location.href = '/dashboard.html';
-      } else {
-        alert(result.message || 'Erreur lors de l\'inscription');
+      try {
+        const response = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, email, password })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          localStorage.setItem('token', result.token);
+          window.location.href = '/dashboard.html';
+        } else {
+          alert(result.message || 'Erreur lors de l\'inscription');
+        }
+      } catch (error) {
+        console.error('Erreur lors de l\'envoi de la requête:', error);
+        alert('Une erreur est survenue. Veuillez réessayer.');
       }
     });
   </script>
