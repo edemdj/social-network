@@ -1,109 +1,89 @@
-# social-network
+Social Network
 
 Introduction
 
-Bienvenue dans le projet de réseau social. Ce référentiel contient le code d'un site de réseautage social où les utilisateurs peuvent interagir par le biais de publications et de commentaires.
+Bienvenue dans le projet Social Network. Ce référentiel contient le code d'un réseau social où les utilisateurs peuvent partager leurs portfolios, interagir par le biais de publications et de commentaires, et découvrir des contenus classés par thèmes.
 
 Caractéristiques
 
-Gestion des utilisateurs : Les utilisateurs peuvent créer des profils, créer des publications et commenter des publications.
-
-Gestion des messages : Les utilisateurs peuvent créer et gérer leurs messages.
-
-Gestion des commentaires : Les utilisateurs peuvent commenter les publications.
-
-Gestion des thèmes : Les messages peuvent être associés à différents thèmes.
-
+Gestion des utilisateurs : Les utilisateurs peuvent créer un profil, se connecter, publier des portfolios, et commenter les publications des autres utilisateurs.
+Portfolios : Les utilisateurs peuvent créer des portfolios et les classer par thèmes.
+Commentaires : Les utilisateurs peuvent commenter les portfolios publiés.
+Thèmes : Les portfolios peuvent être associés à différents thèmes pour faciliter la recherche.
 Installation
 
-Pour installer le projet, procédez comme suit :
+Suivez les étapes ci-dessous pour installer et exécuter le projet en local.
 
-Cloner le référentiel : git clone https://github.com/edemdj/social-network.git
-
-Accédez au répertoire du projet : cd social-network
-
-Installer les dépendances : npm install
-
+Clonez le référentiel :
+git clone https://github.com/edemdj/social-network.git
+Accédez au répertoire du projet :
+cd social-network
+Installez les dépendances :
+npm install
 Utilisation
 
 Pour démarrer le projet :
 
-Exécutez le serveur backend : npm run start
+Exécutez le serveur backend :
+npm run start
+Ouvrez votre navigateur et accédez à http://localhost:3000 pour voir l'application en action.
+Schéma de la Base de Données
 
-Ouvrez votre navigateur et accédez à http://localhost:3000
-
-Schéma de la base de données
-
-Le schéma de la base de données se compose des tableaux suivants :
-
-Utilisateurs : Stocke les informations sur les utilisateurs et leurs relations avec les publications et les commentaires.
-
-Publications : Stocke les informations de publication et leurs relations avec les commentaires.
-
-Commentaires : Stocke les commentaires faits par les utilisateurs sur les publications.
-
-Thèmes : stocke les thèmes et leurs relations avec les publications.
-
-Diagrammes Relationnels Visuels
-
-Travail futur
-
-Mise en œuvre d'une authentification utilisateur plus robuste.
-
-Ajouter plus d'interactions sociales comme les likes et les partages.
-
-Améliorer l'interface utilisateur/UX pour une meilleure expérience utilisateur.
-  
-  •••••••••••••••••••••••••••••••••••••••••••••••••••••••@
-
+Le schéma de la base de données se compose des tables suivantes :
 
 Tables Principales
-
 users
 
-Colonnes:
-id: INT, clé primaire, auto-incrémentée
-username: VARCHAR(255), non null
-email: VARCHAR(255), non null
-password: VARCHAR(255), non null
+id : INT, clé primaire, auto-incrémentée
+username : VARCHAR(255), non null
+email : VARCHAR(255), non null
+password : VARCHAR(255), non null
 portfolios
 
-Colonnes:
-id: INT, clé primaire, auto-incrémentée
-links: TEXT, nullable
-user_id: INT, nullable, clé étrangère référencée à users(id)
-theme_id: INT, nullable
-Relation:
-Chaque portfolio appartient à un utilisateur (user_id).
+id : INT, clé primaire, auto-incrémentée
+links : TEXT, nullable
+user_id : INT, clé étrangère (référence users(id))
+theme_id : INT, nullable
 comments
 
-Colonnes:
-id: INT, clé primaire, auto-incrémentée
-portfolio_id: INT, clé étrangère référencée à portfolios(id)
-user_id: INT, clé étrangère référencée à users(id)
-content: TEXT, non null
-created_at: TIMESTAMP, valeur par défaut CURRENT_TIMESTAMP
-Relations:
-Chaque commentaire appartient à un utilisateur (user_id).
-Chaque commentaire est lié à un portfolio (portfolio_id).
+id : INT, clé primaire, auto-incrémentée
+portfolio_id : INT, clé étrangère (référence portfolios(id))
+user_id : INT, clé étrangère (référence users(id))
+content : TEXT, non null
+created_at : TIMESTAMP, valeur par défaut CURRENT_TIMESTAMP
 themes
 
-Colonnes:
-id: INT, clé primaire, auto-incrémentée
-name: VARCHAR(255), non null
+id : INT, clé primaire, auto-incrémentée
+name : VARCHAR(255), non null
 portfolio_themes
 
-Colonnes:
-portfolio_id: INT, clé étrangère référencée à portfolios(id)
-theme_id: INT, clé étrangère référencée à themes(id)
-Relation:
-Cette table de liaison relie les portfolios aux thèmes.
+portfolio_id : INT, clé étrangère (référence portfolios(id))
+theme_id : INT, clé étrangère (référence themes(id))
 Diagramme Relationnel
+Le schéma suivant montre comment les utilisateurs, les portfolios, les commentaires et les thèmes interagissent dans la base de données :
 
 users (id) <------ portfolios (user_id)
 users (id) <------ comments (user_id)
 portfolios (id) <------ comments (portfolio_id)
 portfolios (id) <------ portfolio_themes (portfolio_id)
 themes (id) <------ portfolio_themes (theme_id)
+Les clés étrangères (user_id, portfolio_id, theme_id) établissent des relations entre les différentes tables pour maintenir l'intégrité des données.
 
-Ce diagramme montre comment les utilisateurs, les portfolios, les commentaires et les thèmes interagissent entre eux dans votre base de données. Les clés étrangères (user_id, portfolio_id, theme_id) établissent des liens entre les différentes tables pour maintenir l'intégrité des données et permettre des jointures efficaces pour les requêtes.
+Diagrammes Relationnels Visuels
+
+Vous pouvez créer des diagrammes visuels pour mieux comprendre les relations de la base de données en utilisant un outil comme dbdiagram.io.
+
+Travail Futur
+
+Amélioration de l'authentification : Mettre en œuvre une authentification utilisateur plus robuste.
+Nouvelles interactions : Ajouter des fonctionnalités de likes et de partages pour enrichir l'expérience utilisateur.
+Améliorations de l'interface : Optimiser l'interface utilisateur (UI) et l'expérience utilisateur (UX) pour un meilleur confort.
+Contribution
+
+Les contributions sont les bienvenues ! Pour contribuer :
+
+Forkez ce dépôt.
+Créez une branche pour votre fonctionnalité (git checkout -b feature/NouvelleFonctionnalite).
+Committez vos changements (git commit -m 'Ajouter nouvelle fonctionnalité').
+Pushez vers la branche (git push origin feature/NouvelleFonctionnalite).
+Ouvrez une pull request pour révision.
