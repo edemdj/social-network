@@ -80,6 +80,11 @@ Nouvelles interactions : Ajouter des fonctionnalités de likes et de partages po
 Améliorations de l'interface : Optimiser l'interface utilisateur (UI) et l'expérience utilisateur (UX) pour un meilleur confort.
 Contribution
 
+TRAVAILLE À VENIR 
+# Metre en relation la fonctionnalité commentaire avec les portfolios
+# Ajouter la fonctionnalité des "LIKE" comme fonctionnalité
+
+
 Les contributions sont les bienvenues ! Pour contribuer :
 
 Forkez ce dépôt.
